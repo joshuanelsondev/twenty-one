@@ -1,0 +1,5 @@
+body.indexBody {
+    height: 100vh;
+    background-image: linear-gradient(to top, #fff1eb 0%, #009688 100%);
+    color: white;
+}
