@@ -38,7 +38,7 @@ body.indexBody {
     grid-row: 1;
     position: relative;
     left: 75px;
-    text-shadow: 2px 3px #10302d;
+    filter: drop-shadow(10px 10px 5px #009688);
 }
 
 .aceSpadeCenter {
@@ -48,6 +48,7 @@ body.indexBody {
     grid-row: 1;
     position: relative;
     right: 30px;
+    filter: drop-shadow(10px 10px 5px #009688);
 }
 
 .kingSpadeCenter {
@@ -57,6 +58,8 @@ body.indexBody {
     grid-row: 1;
     position: relative;
     right: 15px;
+    transform: rotate(7deg);
+    filter: drop-shadow(10px 10px 5px #009688);
 }
 
 

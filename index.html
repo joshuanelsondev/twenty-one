@@ -14,6 +14,32 @@
             <div class="homePageHeaderDiv">
                 <h1 class="header">Twenty-One</h1>
             </div>
+            <button class="gameRulesBtn">Game Rules</button>
+            <button class="userInfoBtn" onclick="openUserInfoForm()">Play Game</button>
+            <form class="userInfoForm">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" placeholder="Name">
+                </div>
+                <div>
+                    <label for="displayName">Username:</label>
+                    <input type="text" name="userName" id="userName" placeholder="Username">
+                    <button class="randomUserName">Random</button>
+                </div>
+                <div>
+                    <label for="numOfPlayers">Number of Players:</label>
+                    <input type="number" name="numOfPlayers" id="numOfPlayers" min="1" max="3" placeholder="1">
+                </div>
+                <div>
+                    <label for="cardColors">Choose a card color:</label>
+                    <select name="cardColors" id="cardColors">
+                        <option value="blue">Blue</option>
+                        <option value="red">Red</option>
+                        <option value="black">Black</option>
+                    </select>
+                </div>
+                <input type="submit" class="submitBtn" value="Start Game">
+            </form>
         </div>
     </div>
     

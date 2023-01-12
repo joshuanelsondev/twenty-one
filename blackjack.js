@@ -8,7 +8,7 @@ let sortedPartialDeck = [];
 let aceSpade, kingSpade, twoSpade, threeSpade, fourSpade;
 let vectorImage;
 
-
+// Use API to create a random username "https://randomuser.me/api/?"
 
 // At the start of the page make an api call to retrieve a partial deck for the styling of the main page
 retrieveDeckInfo(newPartialDeckApi);
@@ -61,7 +61,9 @@ function appendCardsToHeader() {
     homePageHeader.append(aceSpadeCenterContainerImg, kingSpadeCenterContainerImg);
 }
 
-
+function openUserInfoForm() {
+    
+}
 
 
 
