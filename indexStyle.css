@@ -37,7 +37,7 @@ body.indexBody {
     grid-row: 1;
     position: relative;
     left: 75px;
-    filter: drop-shadow(10px 10px 5px #009688);
+    filter: drop-shadow(10px 10px 6px #009688);
 }
 
 .aceSpadeCenter {
