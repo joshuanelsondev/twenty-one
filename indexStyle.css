@@ -14,13 +14,12 @@ body.indexBody {
 
 .homePageCenterCard {
     display: grid;
-    border: 2px solid teal;
     border-radius: 50px;
     height: 600px;
     width: 800px;
     justify-items: center;
-    align-items: center;
-    box-shadow: 10px 15px 20px 0px #15524c
+    align-items: end;
+    box-shadow: 10px 15px 20px 0px #4dd0c3
 }
 
 .homePageHeaderDiv {
@@ -62,4 +61,39 @@ body.indexBody {
     filter: drop-shadow(10px 10px 5px #009688);
 }
 
+.userInfoForm {
+    display: none;
+}
+
+.userInfoBtn.active .userInfoForm{
+    transition: all 300ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
+
+}
+
+.homePageBtns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    position: relative;
+    bottom: 50px;
+    gap: 100px;
+}
+
+.gameRulesBtn, .userInfoBtn {
+    height: 32px;
+    width: 110px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background: #189e91;
+    box-shadow: 3px 2px 5px white;
+    cursor: pointer;
+    transition: box-shadow 0.5s;
+}
+
+.gameRulesBtn:hover,
+.userInfoBtn:hover {
+    box-shadow: 3px 2px 5px #4dd0c3;
+}
 
