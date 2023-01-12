@@ -1,6 +1,6 @@
 // Variables 
 const newPartialDeckApi = 'https://deckofcardsapi.com/api/deck/new/shuffle/?cards=AS,KS,2S,3S,4S';
-const homePageHeader = document.querySelector('.homePageHeader');
+const homePageHeader = document.querySelector('.homePageHeaderDiv');
 let deckId;
 let partialDeckApiWithId;
 let partialDeckArray;
@@ -50,15 +50,15 @@ function retrieveVectorImages() {
 }
 
 function appendCardsToHeader() {
-    const aceSpadeHeader = document.createElement('img');
-    aceSpadeHeader.setAttribute('src',`${aceSpade.images.svg}`);
-    aceSpadeHeader.setAttribute('alt', 'Ace of Spade');
-    aceSpadeHeader.setAttribute('class', 'aceSpade');
-    const kingSpadeHeaderImg = document.createElement('img');
-    kingSpadeHeaderImg.setAttribute('src', `${kingSpade.images.svg}`);
-    kingSpadeHeaderImg.setAttribute('alt', 'King of Spade');
-    kingSpadeHeaderImg.setAttribute('class', 'kingSpade');
-    homePageHeader.append(aceSpadeHeader, kingSpadeHeaderImg);
+    const aceSpadeCenterContainerImg = document.createElement('img');
+    aceSpadeCenterContainerImg.setAttribute('src',`${aceSpade.images.svg}`);
+    aceSpadeCenterContainerImg.setAttribute('alt', 'Ace of Spade');
+    aceSpadeCenterContainerImg.setAttribute('class', 'aceSpadeCenter');
+    const kingSpadeCenterContainerImg = document.createElement('img');
+    kingSpadeCenterContainerImg.setAttribute('src', `${kingSpade.images.svg}`);
+    kingSpadeCenterContainerImg.setAttribute('alt', 'King of Spade');
+    kingSpadeCenterContainerImg.setAttribute('class', 'kingSpadeCenter');
+    homePageHeader.append(aceSpadeCenterContainerImg, kingSpadeCenterContainerImg);
 }
 
 

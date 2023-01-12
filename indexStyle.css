@@ -1,5 +1,62 @@
 body.indexBody {
-    height: 100vh;
     background-image: linear-gradient(to top, #fff1eb 0%, #009688 100%);
     color: white;
+    overflow: hidden;
 }
+
+.homePageContainer {
+    display: grid;
+    justify-items: center;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+}
+
+.homePageCenterCard {
+    display: grid;
+    border: 2px solid teal;
+    border-radius: 50px;
+    height: 600px;
+    width: 800px;
+    justify-items: center;
+    align-items: center;
+    box-shadow: 10px 15px 20px 0px #15524c
+}
+
+.homePageHeaderDiv {
+    display: grid;
+    grid-template-columns: 322px;
+    grid-template-rows: 50px;
+    justify-items: center;
+    align-items: center;
+}
+
+
+.header {
+    font-size: 60px;
+    grid-column: 1 / 2;
+    grid-row: 1;
+    position: relative;
+    left: 75px;
+    text-shadow: 2px 3px #10302d;
+}
+
+.aceSpadeCenter {
+    height: 500px;
+    width: auto;
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    right: 30px;
+}
+
+.kingSpadeCenter {
+    height: 500px;
+    width: auto;
+    grid-column: 2 / 3;
+    grid-row: 1;
+    position: relative;
+    right: 15px;
+}
+
+
