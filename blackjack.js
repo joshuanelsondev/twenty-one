@@ -61,8 +61,12 @@ function appendCardsToHeader() {
     homePageHeader.append(aceSpadeCenterContainerImg, kingSpadeCenterContainerImg);
 }
 
+function showGameRules() {
+
+}
+
 function openUserInfoForm() {
-    
+
 }
 
 
