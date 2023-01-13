@@ -54,7 +54,7 @@ function retrieveVectorImages() {
 function appendCardsToHeader() {
     const aceSpadeCenterContainerImg = document.createElement('img');
     aceSpadeCenterContainerImg.setAttribute('src',`${aceSpade.images.svg}`);
-    aceSpadeCenterContainerImg.setAttribute('alt', 'Ace of Spade');
+    aceSpadeCenterContainerImg.setAttribute('alt', 'Ace of Spade');``
     aceSpadeCenterContainerImg.setAttribute('class', 'aceSpadeCenter');
     const kingSpadeCenterContainerImg = document.createElement('img');
     kingSpadeCenterContainerImg.setAttribute('src', `${kingSpade.images.svg}`);
