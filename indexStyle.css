@@ -47,6 +47,7 @@ body.indexBody {
     position: relative;
     right: 30px;
     filter: drop-shadow(10px 10px 5px #009688);
+    user-select: none;
 }
 
 .kingSpadeCenter {
@@ -58,6 +59,7 @@ body.indexBody {
     right: 15px;
     transform: rotate(7deg);
     filter: drop-shadow(10px 10px 5px #009688);
+    user-select: none;
 }
 
 .userInfoForm {
