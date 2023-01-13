@@ -1,6 +1,8 @@
 // Variables 
 const newPartialDeckApi = 'https://deckofcardsapi.com/api/deck/new/shuffle/?cards=AS,KS,2S,3S,4S';
 const homePageHeader = document.querySelector('.homePageHeaderDiv');
+const gameRulesCard = document.querySelector('.gameRulesCard');
+const userInfoForm = document.querySelector('.userInfoForm');
 let deckId;
 let partialDeckApiWithId;
 let partialDeckArray;
@@ -61,17 +63,13 @@ function appendCardsToHeader() {
     homePageHeader.append(aceSpadeCenterContainerImg, kingSpadeCenterContainerImg);
 }
 
-function showGameRules() {
-
+function toggleGameRules() {
+    gameRulesCard.classList.toggle('activeRulesCard');
 }
 
-function openUserInfoForm() {
-
+function toggleUserInfoForm() {
+    userInfoForm.classList.toggle('activeUserInfoForm');
 }
-
-
-
-
 
 function createErrorMessage(error) {
 

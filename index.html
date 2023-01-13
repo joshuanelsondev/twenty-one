@@ -15,14 +15,13 @@
                 <h1 class="header">Twenty-One</h1>
             </div>
             <div class= "homePageBtns">
-                <button class="gameRulesBtn" onclick="showGameRules()">Game Rules</button>
-                <button class="userInfoBtn" onclick="openUserInfoForm()">Login</button>
+                <button class="gameRulesBtn" onclick="toggleGameRules()">Game Rules</button>
+                <button class="userInfoBtn" onclick="toggleUserInfoForm()">Login</button>
             </div>
             
-            <form class="userInfoForm">
-                <div class="homePageBtns"></div>
-                <h2>PLAYER LOGIN</h2>
-                <button class="closeUserInfoFormButton">x</button>
+            <form class="userInfoForm" onsubmit="return false">
+                <h2 class="loginH2">PLAYER LOGIN</h2>
+                <button class="closeUserInfoFormBtn" onclick="toggleUserInfoForm()">x</button>
                 <div>
                     <label for="name">Name:</label>
                     <input type="text" name="name" id="name" placeholder="Name">
@@ -40,14 +39,14 @@
                         <option value="black">Black</option>
                     </select>
                 </div>
-                <input type="submit" class="submitBtn" value="Start Game">
+                <a href="./gameRoom.html"><input type="submit" class="submitBtn" value="Start Game"></a>
             </form>
             <div class="gameRulesCard">
                 <h2 class="rulesHeader">Game Rules</h2>
-                <button class="closeGameRulesBtn">x</button>
+                <button class="closeGameRulesBtn" onclick="toggleGameRules()">x</button>
                 <ul class="rulesUlElement">
                     <li>In this game of 21 the player will play against the computer who will also serve as the dealer.</li>
-                    <li>Will we be using a standard deck of 52 cards, so no jokers!</li>
+                    <li>We will be using a standard deck of 52 cards, so no jokers!</li>
                     <li>The Objective is for you, the player, to have your cards amount to 21 or as close as possible without going over.</li>
                     <li>To count the cards each card is assigned a value:
                         <li>Number cards are worth their face value. A 2 is worth 2 points, a 3 is worth 3 points and so on, all the way up to 10.</li>

@@ -19,7 +19,7 @@ body.indexBody {
     width: 800px;
     justify-items: center;
     align-items: end;
-    box-shadow: 10px 15px 20px 0px #4dd0c3
+    box-shadow: 10px 15px 20px 10px #4dd0c3
 }
 
 .homePageHeaderDiv {
@@ -29,7 +29,6 @@ body.indexBody {
     justify-items: center;
     align-items: center;
 }
-
 
 .header {
     font-size: 60px;
@@ -63,14 +62,62 @@ body.indexBody {
 
 .userInfoForm {
     display: none;
+    border: 2px solid teal;
+    border-radius: 50px;
+    height: 400px;
+    width: 350px;
+    position: absolute;
+    right: 100px;
+    background: #189e91;
+    box-shadow: 5px 5px 5px #08635a;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
 }
 
-.userInfoBtn.active .userInfoForm{
-    transition: all 300ms ease-in-out;
-    transform: translate(-50%, -50%) scale(1);
-
+.activeUserInfoForm {
+    display: grid;
+    justify-items: center;
+    align-items: center;
 }
 
+.loginH2 {
+    grid-column: 1;
+    grid-row: 1 / 2;
+}
+
+.gameRulesCard {
+    display: none;
+    border-radius: 50px;
+    height: 680px;
+    width: 430px;
+    position: absolute;
+    bottom: 50px;
+    left: 132px;
+    background: #189e91;
+    padding-right: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50px;
+    align-items: center;
+    justify-items: center;
+    box-shadow: 5px 5px 5px #08635a;
+    letter-spacing: 1px;
+    transition: display 0.5s ease-in;
+}
+
+.activeRulesCard {
+    display: grid;
+}
+
+.rulesHeader {
+    text-align: center;
+}
+
+.rulesUlElement {
+    grid-column: 1 / 3;
+    grid-row: 2;
+}
+
+/* Buttons */
 .homePageBtns {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -80,7 +127,8 @@ body.indexBody {
     gap: 100px;
 }
 
-.gameRulesBtn, .userInfoBtn {
+.gameRulesBtn,
+.userInfoBtn {
     height: 32px;
     width: 110px;
     border-radius: 10px;
@@ -97,28 +145,6 @@ body.indexBody {
     box-shadow: 3px 2px 5px #4dd0c3;
 }
 
-.gameRulesCard {
-    display: grid;
-    border-radius: 50px;
-    height: 680px;
-    width: 430px;
-    position: absolute;
-    bottom: 50px;
-    left: 132px;
-    background: #189e91;
-    padding-right: 10px;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 50px;
-    align-items: center;
-    justify-items: center;
-    box-shadow: 5px 5px 5px #08635a;
-    letter-spacing: 1px;
-}
-
-.rulesHeader {
-    text-align: center;
-}
-
 .closeGameRulesBtn {
     display: grid;
     align-items: center;
@@ -132,9 +158,42 @@ body.indexBody {
     color: white;
     box-shadow: 2px 2px 5px #010d0b;
     background: #08635a;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in;
 }
 
-.rulesUlElement {
-    grid-column: 1 / 3;
-    grid-row: 2;
+.closeGameRulesBtn:hover, 
+.closeUserInfoFormBtn:hover,
+.submitBtn:hover {
+    box-shadow: 2px 2px 5px white;
+}
+
+.closeUserInfoFormBtn {
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    border: none;
+    position: relative;
+    left: 150px;
+    font-size: 20px;
+    color: white;
+    box-shadow: 2px 2px 5px #010d0b;
+    background: #08635a;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in;
+    grid-column: 1;
+    grid-row: 1 / 2;
+}
+
+
+.submitBtn {
+    height: 32px;
+    width: 110px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background: #08635a;
+    box-shadow: 2px 2px 5px #010d0b;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in;
 }
