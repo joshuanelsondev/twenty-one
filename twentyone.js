@@ -3,6 +3,23 @@ const newPartialDeckApi = 'https://deckofcardsapi.com/api/deck/new/shuffle/?card
 const homePageHeader = document.querySelector('.homePageHeaderDiv');
 const gameRulesCard = document.querySelector('.gameRulesCard');
 const userInfoForm = document.querySelector('.userInfoForm');
+const nameTextField = document.querySelector('.nameInput') ;
+const usernameTextField = document.querySelector('.usernameTextField');
+const nameDiv = document.querySelector('.nameDiv');
+const usernameDiv = document.querySelector('.usernameDiv');
+const submitBtn = document.querySelector('.submitBtn');
+const nameErrorMessage = document.createElement('p');
+const usernameErrorMessage = document.createElement('p');
+const closeUserInfoBtn = document.querySelector('.closeUserInfoBtn');
+nameErrorMessage.textContent = 'Name must only include letters';
+usernameErrorMessage.textContent = 'Please type a username';
+nameErrorMessage.classList.add('errorMessage');
+usernameErrorMessage.classList.add('errorMessage');
+
+
+
+nameDiv.append(nameErrorMessage);
+usernameDiv.append(usernameErrorMessage);
 let deckId;
 let partialDeckApiWithId;
 let partialDeckArray;
@@ -10,11 +27,9 @@ let sortedPartialDeck = [];
 let aceSpade, kingSpade, twoSpade, threeSpade, fourSpade;
 let vectorImage;
 
-// Use API to create a random username "https://randomuser.me/api/?"
 
-// At the start of the page make an api call to retrieve a partial deck for the styling of the main page
-retrieveDeckInfo(newPartialDeckApi);
-
+submitBtn.addEventListener('click', enterGameRoom);
+nameTextField.addEventListener('blur', toggleErrorMessage);
 
 function retrieveDeckInfo(api) {
     fetch(api)
@@ -47,9 +62,6 @@ function sortPartialDeckArray(array){
     sortedPartialDeck.push(aceSpade, kingSpade, twoSpade, threeSpade, fourSpade);
 }
 
-function retrieveVectorImages() {
-
-}
 
 function appendCardsToHeader() {
     const aceSpadeCenterContainerImg = document.createElement('img');
@@ -71,9 +83,49 @@ function toggleUserInfoForm() {
     userInfoForm.classList.toggle('activeUserInfoForm');
 }
 
+function getRandomUsername() {
+    const url = 'https://randomuser.me/api/?';
+    fetch(url)
+        .then((response) => response.json())
+        .then((response) => {
+            console.log(response.results[0].login.username);
+            appendRandomUsername(response.results[0].login.username);
+        })
+        .catch((error) => {
+            createErrorMessage(error);
+        });
+}
+
+function appendRandomUsername(username) {
+    usernameTextField.value = username;
+}
+
+function enterGameRoom() {
+    if(nameTextField.checkValidity() && nameTextField.value !== '' && usernameTextField.value !== '') {
+        window.location.href = "./gameRoom.html";
+    } 
+}
+
+function toggleErrorMessage (event) {
+    if(event.target.value === '') {
+        event.target.parentNode.lastChild.classList.add('showErrorMessage');
+    } else {
+        event.target.parentNode.lastChild.classList.remove('showErrorMessage');
+    }
+}
+
 function createErrorMessage(error) {
 
 }
+
+window.onload = (event) => {
+    retrieveDeckInfo(newPartialDeckApi);
+    const perfEntries = performance.getEntriesByType("navigation");
+
+    if (perfEntries[0].type === "back_forward") {
+        location.reload(true);
+    }
+};
 
 
 

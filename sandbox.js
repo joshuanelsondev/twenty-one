@@ -16,3 +16,4 @@ function sortPartialDeckArray(array) {
 }
 
 console.log(sortPartialDeckArray(array));
+

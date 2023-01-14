@@ -9,7 +9,8 @@ body.indexBody {
     justify-items: center;
     height: 100vh;
     width: 100vw;
-    align-items: center;
+    align-items: start;
+    margin-top: 100px;
 }
 
 .homePageCenterCard {
@@ -47,7 +48,7 @@ body.indexBody {
     position: relative;
     right: 30px;
     filter: drop-shadow(10px 10px 5px #009688);
-    user-select: none;
+     user-select: none;
 }
 
 .kingSpadeCenter {
@@ -64,12 +65,11 @@ body.indexBody {
 
 .userInfoForm {
     display: none;
-    border: 2px solid teal;
     border-radius: 50px;
     height: 400px;
     width: 350px;
     position: absolute;
-    right: 100px;
+    bottom: 180px;
     background: #189e91;
     box-shadow: 5px 5px 5px #08635a;
     grid-template-columns: 1fr;
@@ -85,6 +85,48 @@ body.indexBody {
 .loginH2 {
     grid-column: 1;
     grid-row: 1 / 2;
+    text-shadow: 5px 5px 6px #08635a;
+}
+
+.nameDiv,
+.usernameDiv {
+    display: grid;
+    height: 25px;
+}
+
+.cardColorsDiv {
+    display: block;
+    width: 200px;
+}
+
+.cardColorsLabel {
+    font-size: 16px;
+}
+
+.cardColorsSelect {
+    background: #10534a;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+label {
+    font-size: 12px;
+}
+
+.textInput {
+    font-size: 14px;
+    background: #189E91;
+    border: none;
+    border-bottom: 1px solid white;
+    width: 200px;
+    color: white;
+    
+}
+
+::placeholder {
+    color: white;
+    opacity: 0.7;
 }
 
 .gameRulesCard {
@@ -93,8 +135,7 @@ body.indexBody {
     height: 680px;
     width: 430px;
     position: absolute;
-    bottom: 50px;
-    left: 132px;
+    left: 300px; 
     background: #189e91;
     padding-right: 10px;
     grid-template-columns: 1fr 1fr;
@@ -117,6 +158,19 @@ body.indexBody {
 .rulesUlElement {
     grid-column: 1 / 3;
     grid-row: 2;
+}
+
+.errorMessage {
+    display: none;
+    margin: 0;
+    color: rgb(238, 255, 0);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.showErrorMessage {
+    display: block !important;
 }
 
 /* Buttons */
@@ -176,7 +230,7 @@ body.indexBody {
     border-radius: 50px;
     border: none;
     position: relative;
-    left: 150px;
+    left: 130px;
     font-size: 20px;
     color: white;
     box-shadow: 2px 2px 5px #010d0b;
@@ -186,7 +240,6 @@ body.indexBody {
     grid-column: 1;
     grid-row: 1 / 2;
 }
-
 
 .submitBtn {
     height: 32px;
@@ -198,4 +251,20 @@ body.indexBody {
     box-shadow: 2px 2px 5px #010d0b;
     cursor: pointer;
     transition: box-shadow 0.3s ease-in;
+}
+
+.randomUsernameBtn {
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 30px;
+    display: grid;
+    align-content: center;
+    cursor: pointer;
+    background: none;
+    color: white;
+    text-shadow: 3px 3px 3px #010d0b;
+    position: absolute;
+    left: 270px;
 }
