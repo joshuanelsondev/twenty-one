@@ -8,16 +8,14 @@ const usernameTextField = document.querySelector('.usernameTextField');
 const nameDiv = document.querySelector('.nameDiv');
 const usernameDiv = document.querySelector('.usernameDiv');
 const submitBtn = document.querySelector('.submitBtn');
+const randomUsernameBtn = document.querySelector('.randomUsernameBtn');
 const nameErrorMessage = document.createElement('p');
 const usernameErrorMessage = document.createElement('p');
-const closeUserInfoBtn = document.querySelector('.closeUserInfoBtn');
+const closeUserInfoFormBtn = document.querySelector('.closeUserInfoFormBtn');
 nameErrorMessage.textContent = 'Name must only include letters';
 usernameErrorMessage.textContent = 'Please type a username';
 nameErrorMessage.classList.add('errorMessage');
 usernameErrorMessage.classList.add('errorMessage');
-
-
-
 nameDiv.append(nameErrorMessage);
 usernameDiv.append(usernameErrorMessage);
 let deckId;
@@ -29,7 +27,15 @@ let vectorImage;
 
 
 submitBtn.addEventListener('click', enterGameRoom);
-nameTextField.addEventListener('blur', toggleErrorMessage);
+nameTextField.addEventListener('blur', showErrorMessage);
+usernameTextField.addEventListener('blur', showErrorMessage);
+nameTextField.addEventListener('focus', hideErrorMessage);
+usernameTextField.addEventListener('focus', hideErrorMessage);
+randomUsernameBtn.addEventListener('click', hideErrorMessage);
+// closeUserInfoFormBtn.addEventListener('click', hideAllErrorMessages);
+
+
+
 
 function retrieveDeckInfo(api) {
     fetch(api)
@@ -66,7 +72,7 @@ function sortPartialDeckArray(array){
 function appendCardsToHeader() {
     const aceSpadeCenterContainerImg = document.createElement('img');
     aceSpadeCenterContainerImg.setAttribute('src',`${aceSpade.images.svg}`);
-    aceSpadeCenterContainerImg.setAttribute('alt', 'Ace of Spade');``
+    aceSpadeCenterContainerImg.setAttribute('alt', 'Ace of Spade');
     aceSpadeCenterContainerImg.setAttribute('class', 'aceSpadeCenter');
     const kingSpadeCenterContainerImg = document.createElement('img');
     kingSpadeCenterContainerImg.setAttribute('src', `${kingSpade.images.svg}`);
@@ -80,7 +86,10 @@ function toggleGameRules() {
 }
 
 function toggleUserInfoForm() {
+    userInfoForm.reset();
     userInfoForm.classList.toggle('activeUserInfoForm');
+    nameErrorMessage.classList.remove('showErrorMessage');
+    usernameErrorMessage.classList.remove('showErrorMessage');
 }
 
 function getRandomUsername() {
@@ -88,7 +97,6 @@ function getRandomUsername() {
     fetch(url)
         .then((response) => response.json())
         .then((response) => {
-            console.log(response.results[0].login.username);
             appendRandomUsername(response.results[0].login.username);
         })
         .catch((error) => {
@@ -100,18 +108,28 @@ function appendRandomUsername(username) {
     usernameTextField.value = username;
 }
 
-function enterGameRoom() {
+function enterGameRoom() {   
+
     if(nameTextField.checkValidity() && nameTextField.value !== '' && usernameTextField.value !== '') {
         window.location.href = "./gameRoom.html";
     } 
+    if(nameTextField.value === '') {
+        nameErrorMessage.classList.add('showErrorMessage');
+    }
+    if (usernameTextField.value === '') {
+        usernameErrorMessage.classList.add('showErrorMessage');
+    }
+
 }
 
-function toggleErrorMessage (event) {
-    if(event.target.value === '') {
-        event.target.parentNode.lastChild.classList.add('showErrorMessage');
-    } else {
-        event.target.parentNode.lastChild.classList.remove('showErrorMessage');
-    }
+function showErrorMessage() {
+    if(this.value === '') {
+        this.parentNode.lastChild.classList.add('showErrorMessage');
+    } 
+}
+
+function hideErrorMessage() {
+    this.parentNode.lastChild.classList.remove('showErrorMessage');
 }
 
 function createErrorMessage(error) {

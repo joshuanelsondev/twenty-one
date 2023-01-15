@@ -184,7 +184,7 @@ label {
 }
 
 .gameRulesBtn,
-.userInfoBtn {
+.userLoginBtn {
     height: 32px;
     width: 110px;
     border-radius: 10px;
@@ -197,7 +197,7 @@ label {
 }
 
 .gameRulesBtn:hover,
-.userInfoBtn:hover {
+.userLoginBtn:hover {
     box-shadow: 3px 2px 5px #4dd0c3;
 }
 
