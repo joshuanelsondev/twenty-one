@@ -1,7 +1,8 @@
 // Variables 
-const newPartialDeckApi = 'https://deckofcardsapi.com/api/deck/new/shuffle/?cards=AS,KS,2S,3S,4S';
+const newPartialDeckApi = 'https://deckofcardsapi.com/api/deck/new/shuffle/?cards=AS,KS';
 const homePageHeader = document.querySelector('.homePageHeaderDiv');
 const gameRulesCard = document.querySelector('.gameRulesCard');
+const userFormBackgroundDiv = document.querySelector('.userFormBackgroundDiv');
 const userInfoForm = document.querySelector('.userInfoForm');
 const nameTextField = document.querySelector('.nameInput') ;
 const usernameTextField = document.querySelector('.usernameTextField');
@@ -20,10 +21,7 @@ nameDiv.append(nameErrorMessage);
 usernameDiv.append(usernameErrorMessage);
 let deckId;
 let partialDeckApiWithId;
-let partialDeckArray;
-let sortedPartialDeck = [];
-let aceSpade, kingSpade, twoSpade, threeSpade, fourSpade;
-let vectorImage;
+let aceSpade, kingSpade;
 
 
 submitBtn.addEventListener('click', enterGameRoom);
@@ -44,7 +42,7 @@ function retrieveDeckInfo(api) {
             if(!deckId) {
                 getDeckId(response);
             } else {
-                sortPartialDeckArray(response.cards);
+                assignAceAndKingOfSpades(response.cards);
                 appendCardsToHeader();
             }
         })
@@ -59,13 +57,9 @@ function getDeckId(deckObj) {
     retrieveDeckInfo(partialDeckApiWithId);
 }
 
-function sortPartialDeckArray(array){
+function assignAceAndKingOfSpades(array){
     aceSpade = array.find(deckObj => deckObj.value == 'ACE');
     kingSpade = array.find(deckObj => deckObj.value == 'KING');
-    twoSpade = array.find(deckObj => deckObj.value == '2');
-    threeSpade = array.find(deckObj => deckObj.value == '3');
-    fourSpade = array.find(deckObj => deckObj.value == '4');
-    sortedPartialDeck.push(aceSpade, kingSpade, twoSpade, threeSpade, fourSpade);
 }
 
 
@@ -83,10 +77,12 @@ function appendCardsToHeader() {
 
 function toggleGameRules() {
     gameRulesCard.classList.toggle('activeRulesCard');
+    userFormBackgroundDiv.classList.toggle('inactiveUserFormBackground');
 }
 
 function toggleUserInfoForm() {
     userInfoForm.reset();
+    userFormBackgroundDiv.classList.toggle('inactiveUserFormBackground');
     userInfoForm.classList.toggle('activeUserInfoForm');
     nameErrorMessage.classList.remove('showErrorMessage');
     usernameErrorMessage.classList.remove('showErrorMessage');

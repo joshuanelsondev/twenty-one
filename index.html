@@ -18,29 +18,33 @@
                 <button class="gameRulesBtn" onclick="toggleGameRules()">Game Rules</button>
                 <button class="userLoginBtn" onclick="toggleUserInfoForm()">Login</button>
             </div>
+            <div class="userFormBackgroundDiv inactiveUserFormBackground">
+                <form class="userInfoForm" onsubmit="return false">
+                    <h2 class="loginH2">LOGIN</h2>
+                    <button class="closeUserInfoFormBtn" onclick="toggleUserInfoForm()">x</button>
+                    <div class="nameDiv">
+                        <label for="name">Name</label>
+                        <input class="textInput nameInput" type="text" name="name" id="name" placeholder="Type your name" maxlength="20"
+                            pattern="^[A-Za-z]+$">
+                    </div>
+                    <div class="usernameDiv">
+                        <label for="userName">Username</label>
+                        <input class="textInput usernameTextField" type="text" name="userName" id="userName"
+                            placeholder="Create a username">
+                        <button class="randomUsernameBtn" onclick="getRandomUsername()">⟳</button>
+                    </div>
+                    <div class="cardColorsDiv">
+                        <label class="cardColorsLabel" for="cardColors">Choose a card color</label>
+                        <select class="cardColorsSelect" name="cardColors" id="cardColors">
+                            <option value="blue">Blue</option>
+                            <option value="red">Red</option>
+                            <option value="black">Black</option>
+                        </select>
+                    </div>
+                    <input type="submit" class="submitBtn" value="Start Game">
+                </form>
+            </div>
             
-            <form class="userInfoForm" onsubmit="return false">
-                <h2 class="loginH2">LOGIN</h2>
-                <button class="closeUserInfoFormBtn"n onclick="toggleUserInfoForm()">x</button>
-                <div class="nameDiv">
-                    <label for="name">Name</label>
-                    <input class="textInput nameInput" type="text" name="name" id="name" placeholder="Type your name" maxlength="20" pattern="^[A-Za-z]+$">
-                </div>
-                <div class="usernameDiv">
-                    <label for="userName">Username</label>
-                    <input class="textInput usernameTextField" type="text" name="userName" id="userName" placeholder="Create a username">
-                    <button class="randomUsernameBtn" onclick="getRandomUsername()">⟳</button>
-                </div>
-                <div class="cardColorsDiv">
-                    <label for="cardColorsLabel">Choose a card color</label>
-                    <select class="cardColorsSelect" name="cardColors" id="cardColors">
-                        <option value="blue">Blue</option>
-                        <option value="red">Red</option>
-                        <option value="black">Black</option>
-                    </select>
-                </div>
-                <input type="submit" class="submitBtn" value="Start Game">
-            </form>
             <div class="gameRulesCard">
                 <h2 class="rulesHeader">Game Rules</h2>
                 <button class="closeGameRulesBtn" onclick="toggleGameRules()">x</button>
@@ -49,10 +53,13 @@
                     <li>We will be using a standard deck of 52 cards, so no jokers!</li>
                     <li>The Objective is for you, the player, to have your cards amount to 21 or as close as possible without going over.</li>
                     <li>To count the cards each card is assigned a value:
-                        <li>Number cards are worth their face value. A 2 is worth 2 points, a 3 is worth 3 points and so on, all the way up to 10.</li>
-                        <li>The king, queen, and jack are worth 10 points.</li>
-                        <li>The Ace is worth 1 point or 11 points, with the decision being left to the player.</li>
-                     </li>
+                        <ul>
+                            <li>Number cards are worth their face value. A 2 is worth 2 points, a 3 is worth 3 points and so on, all the way up to
+                                10.</li>
+                            <li>The king, queen, and jack are worth 10 points.</li>
+                            <li>The Ace is worth 1 point or 11 points, with the decision being left to the player.</li>
+                            </li>
+                        </ul>
                     <li>The player will be dealt 2 cards that will remain face up while the dealer will have their first card showing and the second one face down.</li>
                     <li>The player will have the option to HIT (draw another card) as long as they are not over 21 points.</li>
                     <li>In this version of 21 the player must HIT if their points are under 17, the same rule goes for the dealer.</li>

@@ -34,7 +34,7 @@ body.indexBody {
 .header {
     font-size: 60px;
     grid-column: 1 / 2;
-    grid-row: 1;
+    grid-row: 2;
     position: relative;
     left: 75px;
     filter: drop-shadow(10px 10px 6px #009688);
@@ -44,7 +44,7 @@ body.indexBody {
     height: 500px;
     width: auto;
     grid-column: 2;
-    grid-row: 1;
+    grid-row: 2;
     position: relative;
     right: 30px;
     filter: drop-shadow(10px 10px 5px #009688);
@@ -55,7 +55,7 @@ body.indexBody {
     height: 500px;
     width: auto;
     grid-column: 2 / 3;
-    grid-row: 1;
+    grid-row: 2;
     position: relative;
     right: 15px;
     transform: rotate(7deg);
@@ -63,13 +63,29 @@ body.indexBody {
     user-select: none;
 }
 
+.userFormBackgroundDiv {
+    display: flex;
+    border-radius: 50px;
+    height: 600px;
+    width: 800px;
+    position: absolute;
+    flex-direction: row;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+}
+
+.inactiveUserFormBackground {
+    display: none;
+}
+
 .userInfoForm {
     display: none;
     border-radius: 50px;
     height: 400px;
     width: 350px;
-    position: absolute;
-    bottom: 180px;
+    position: relative;
     background: #189e91;
     box-shadow: 5px 5px 5px #08635a;
     grid-template-columns: 1fr;
@@ -116,12 +132,22 @@ label {
 
 .textInput {
     font-size: 14px;
-    background: #189E91;
+    background: #189E91 !important;
     border: none;
     border-bottom: 1px solid white;
     width: 200px;
-    color: white;
-    
+    color: white;  
+}
+
+.textInput:focus {
+    outline: none;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #189E91 inset !important;
+    -webkit-text-fill-color: white !important;
 }
 
 ::placeholder {
@@ -135,7 +161,7 @@ label {
     height: 680px;
     width: 430px;
     position: absolute;
-    left: 300px; 
+    bottom: 75px;
     background: #189e91;
     padding-right: 10px;
     grid-template-columns: 1fr 1fr;
@@ -178,6 +204,7 @@ label {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
+    grid-row: 3;
     position: relative;
     bottom: 50px;
     gap: 100px;
