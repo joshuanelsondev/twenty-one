@@ -1,4 +1,52 @@
 body.gameRoomBody {
     height: 100vh;
     background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+    margin: 0;
+
+}
+
+.gameRoomHeaderDiv {
+    display: grid;
+    height: 100px;
+    width: 100vw;
+    color: White;
+    text-align: center;
+    background-color: black;
+    margin: 0;
+    align-items: center;
+    background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+    background-blend-mode: multiply;
+}
+
+
+.gameRoomHeader {
+    margin: 0;
+}
+
+.gameRoomMainContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(2, 200px);
+    height: auto;
+}
+
+.dealerDiv,
+.deckOfCardsDiv, 
+.playerDiv {
+    border: 2px solid black;
+}
+
+.deckImage {
+    border-radius: 12px;
+    height: 270px;
+    box-shadow: #1c1c1c 0px 10px 10px,
+        #3f3f3f 0px 15px 10px,
+        #1c1c1c 0px 20px 10px,
+        #3f3f3f 0px 25px 10px,
+        #1c1c1c 0px 30px 10px;
+    cursor: pointer;
+}
+
+.deckImage:active {
+    height: 269px;
 }

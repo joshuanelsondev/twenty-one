@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="indexStyle.css">
-    <script src="twentyone.js" defer></script>
+    <script type="module" src="./twentyone.js" defer></script>
     <title>Twenty-One</title>
 </head>
 <body class="indexBody">
@@ -15,13 +15,13 @@
                 <h1 class="header">Twenty-One</h1>
             </div>
             <div class= "homePageBtns">
-                <button class="gameRulesBtn" onclick="toggleGameRules()">Game Rules</button>
-                <button class="userLoginBtn" onclick="toggleUserInfoForm()">Login</button>
+                <button class="gameRulesBtn">Game Rules</button>
+                <button class="userLoginBtn">Login</button>
             </div>
             <div class="userFormBackgroundDiv inactiveUserFormBackground">
                 <form class="userInfoForm" onsubmit="return false">
                     <h2 class="loginH2">LOGIN</h2>
-                    <button class="closeUserInfoFormBtn" onclick="toggleUserInfoForm()">x</button>
+                    <button class="closeUserInfoFormBtn" >x</button>
                     <div class="nameDiv">
                         <label for="name">Name</label>
                         <input class="textInput nameInput" type="text" name="name" id="name" placeholder="Type your name" maxlength="20"
@@ -31,7 +31,7 @@
                         <label for="userName">Username</label>
                         <input class="textInput usernameTextField" type="text" name="userName" id="userName"
                             placeholder="Create a username">
-                        <button class="randomUsernameBtn" onclick="getRandomUsername()">⟳</button>
+                        <button class="randomUsernameBtn">⟳</button>
                     </div>
                     <div class="cardColorsDiv">
                         <label class="cardColorsLabel" for="cardColors">Choose a card color</label>
@@ -47,7 +47,7 @@
             
             <div class="gameRulesCard">
                 <h2 class="rulesHeader">Game Rules</h2>
-                <button class="closeGameRulesBtn" onclick="toggleGameRules()">x</button>
+                <button class="closeGameRulesBtn">x</button>
                 <ul class="rulesUlElement">
                     <li>In this game of 21 the player will play against the computer who will also serve as the dealer.</li>
                     <li>We will be using a standard deck of 52 cards, so no jokers!</li>

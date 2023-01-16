@@ -1,39 +1,45 @@
+
 // Variables 
+const cardColorsSelect = document.querySelector('.cardColorsSelect');
+const closeGameRulesBtn = document.querySelector('.closeGameRulesBtn');
+const closeUserInfoFormBtn = document.querySelector('.closeUserInfoFormBtn');
 const newPartialDeckApi = 'https://deckofcardsapi.com/api/deck/new/shuffle/?cards=AS,KS';
-const homePageHeader = document.querySelector('.homePageHeaderDiv');
 const gameRulesCard = document.querySelector('.gameRulesCard');
-const userFormBackgroundDiv = document.querySelector('.userFormBackgroundDiv');
-const userInfoForm = document.querySelector('.userInfoForm');
+const gameRulesBtn = document.querySelector('.gameRulesBtn');
+const homePageHeader = document.querySelector('.homePageHeaderDiv');
 const nameTextField = document.querySelector('.nameInput') ;
-const usernameTextField = document.querySelector('.usernameTextField');
 const nameDiv = document.querySelector('.nameDiv');
-const usernameDiv = document.querySelector('.usernameDiv');
-const submitBtn = document.querySelector('.submitBtn');
-const randomUsernameBtn = document.querySelector('.randomUsernameBtn');
 const nameErrorMessage = document.createElement('p');
 const usernameErrorMessage = document.createElement('p');
-const closeUserInfoFormBtn = document.querySelector('.closeUserInfoFormBtn');
-nameErrorMessage.textContent = 'Name must only include letters';
-usernameErrorMessage.textContent = 'Please type a username';
-nameErrorMessage.classList.add('errorMessage');
-usernameErrorMessage.classList.add('errorMessage');
-nameDiv.append(nameErrorMessage);
-usernameDiv.append(usernameErrorMessage);
+const userFormBackgroundDiv = document.querySelector('.userFormBackgroundDiv');
+const userInfoForm = document.querySelector('.userInfoForm');
+const userLoginBtn = document.querySelector('.userLoginBtn');
+const usernameTextField = document.querySelector('.usernameTextField');
+const usernameDiv = document.querySelector('.usernameDiv');
+const randomUsernameBtn = document.querySelector('.randomUsernameBtn');
+const submitBtn = document.querySelector('.submitBtn');
+let userInfoObj = {};
+let aceSpade, kingSpade;
 let deckId;
 let partialDeckApiWithId;
-let aceSpade, kingSpade;
+nameErrorMessage.textContent = 'Name must only include letters';
+nameErrorMessage.classList.add('errorMessage');
+nameDiv.append(nameErrorMessage);
+usernameErrorMessage.textContent = 'Please type a username';
+usernameErrorMessage.classList.add('errorMessage');
+usernameDiv.append(usernameErrorMessage);
 
-
-submitBtn.addEventListener('click', enterGameRoom);
+closeUserInfoFormBtn.addEventListener('click', toggleUserInfoForm);
+closeGameRulesBtn.addEventListener('click', toggleGameRules);
+gameRulesBtn.addEventListener('click', toggleGameRules);
 nameTextField.addEventListener('blur', showErrorMessage);
+randomUsernameBtn.addEventListener('click', hideErrorMessage);
+randomUsernameBtn.addEventListener('click', getRandomUsername);
+submitBtn.addEventListener('click', enterGameRoom);
 usernameTextField.addEventListener('blur', showErrorMessage);
 nameTextField.addEventListener('focus', hideErrorMessage);
 usernameTextField.addEventListener('focus', hideErrorMessage);
-randomUsernameBtn.addEventListener('click', hideErrorMessage);
-// closeUserInfoFormBtn.addEventListener('click', hideAllErrorMessages);
-
-
-
+userLoginBtn.addEventListener('click', toggleUserInfoForm);
 
 function retrieveDeckInfo(api) {
     fetch(api)
@@ -107,6 +113,10 @@ function appendRandomUsername(username) {
 function enterGameRoom() {   
 
     if(nameTextField.checkValidity() && nameTextField.value !== '' && usernameTextField.value !== '') {
+        userInfoObj.name = nameTextField.value;
+        userInfoObj.username = usernameTextField.value;
+        userInfoObj.cardColor = cardColorsSelect.value;
+        localStorage.setItem("userInfo", JSON.stringify(userInfoObj));
         window.location.href = "./gameRoom.html";
     } 
     if(nameTextField.value === '') {
@@ -115,7 +125,6 @@ function enterGameRoom() {
     if (usernameTextField.value === '') {
         usernameErrorMessage.classList.add('showErrorMessage');
     }
-
 }
 
 function showErrorMessage() {
@@ -132,15 +141,13 @@ function createErrorMessage(error) {
 
 }
 
-window.onload = (event) => {
+window.onload = () => {
     retrieveDeckInfo(newPartialDeckApi);
     const perfEntries = performance.getEntriesByType("navigation");
 
+    // Reload page when pressing back button
     if (perfEntries[0].type === "back_forward") {
         location.reload(true);
     }
 };
-
-
-
 
