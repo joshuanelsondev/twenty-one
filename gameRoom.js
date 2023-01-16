@@ -1,14 +1,19 @@
 let userInfo = JSON.parse(localStorage.getItem("userInfo"));
 const {name, username, cardColor} = userInfo;
 
+const cardColorsObj = {
+    'black': './card_colors/Black_card_back_1.jpeg',
+    'blue': './card_colors/Blue_card_back_0.png',
+    'red': './card_colors/Red_card_back.png'
+
+};
+
+const currCardColorFile = cardColorsObj[cardColor];
+
 const deckOfCardsDiv = document.querySelector('.deckOfCardsDiv');
 const deckImage = document.createElement('img');
 const usernameHeader = document.querySelector('.username');
 let deckId;
-deckImage.setAttribute('src', './Blue_card_back_0.png');
-deckImage.setAttribute('alt', 'Blue playing card');
-deckOfCardsDiv.append(deckImage);
-deckImage.classList.add('deckImage');
 usernameHeader.textContent = username;
 
 function assignDeckId(promise) {
@@ -21,6 +26,13 @@ function assignDeckId(promise) {
 function callNewDeck() {
     const newDeckApi = 'https://deckofcardsapi.com/api/deck/new/';
     assignDeckId(makeApiCall(newDeckApi));
+}
+
+function appendDeckImage() {
+    deckImage.setAttribute('src', currCardColorFile);
+    deckImage.setAttribute('alt', `${cardColor} playing card`);
+    deckOfCardsDiv.append(deckImage);
+    deckImage.classList.add('deckImage');
 }
 
 function makeApiCall(url) {
@@ -41,4 +53,5 @@ function shuffleDeck(deckId) {
 
 window.onload = () => {
     callNewDeck();
+    appendDeckImage();
 };
