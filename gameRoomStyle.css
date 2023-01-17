@@ -32,6 +32,16 @@ body.gameRoomBody {
     text-align: center;
 }
 
+.dealerHeader,
+.username {
+    font-size: 36px;
+    text-shadow: 5px 5px 10px #004a2a;
+}
+
+.score {
+    font-size: 20px;
+    font-weight: 600;
+}
 
 .dealerDiv {
 
@@ -94,11 +104,12 @@ body.gameRoomBody {
 .playerCardSlotDiv {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 300px 1fr;
     position: absolute;
     top: 35vh;
     right: 20vh;
-    justify-items: center;
+    width: fit-content;
+    justify-items: end;
 }
 
 .playerCardSlot1,
@@ -107,47 +118,25 @@ body.gameRoomBody {
     grid-row: 1;
 }
 
-
-/* 
-.dealerCardSlot1,
-.dealerCardSlot2,
-.playerCardOne {
-    position: absolute;
-    top: 300px;
-    left: 300px;
+.playerDrawnCardsSlot {
+    
 }
 
-
-.dealerCardSlot2 {
-    position: absolute;
-    left: 260px;
-    transform: translateY(50px);
+.h3 {
     display: grid;
-    z-index: 1;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    transform: translateY(50px);
-} */
-
-/* .dealerFaceDownCard,
-.dealerCardTwo {
-    display: grid;
-    grid-column: 1;
-    grid-row: 1;
+    font-size: 32px;
+    background: #00000099;
+    height: 80px;
+    width: 500px;
+    align-items: center;
+    color: white;
 }
 
-.playerCardTwo {
-    position: absolute;
-    top: 300px;
-    right: 120px;
-    transform: translateY(50px);
+.winnerBanner {
+    font-size: 30px;
+    font-weight: 600;
 }
 
-.playerDrawnCard {
-    position: relative;
-    top: 400px;
-    right: 120px;   
-} */
 /* Buttons */
 .dealBtn, .hitButton,
 .stayButton {
