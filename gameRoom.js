@@ -25,7 +25,7 @@ const cardValuesObj = {
 };
 
 // Variables
-
+const bustBanner = document.createElement('h3');
 const currCardColorFile = cardColorsObj[cardColor];
 const delay = 2000;
 const deckOfCardsDiv = document.querySelector('.deckOfCardsDiv');
@@ -33,9 +33,12 @@ const deckImage = document.createElement('img');
 const dealBtn = document.querySelector('.dealBtn');
 const dealerCardSlot1 = document.querySelector('.dealerCardSlot1');
 const dealerCardSlot2 = document.querySelector('.dealerCardSlot2');
+const dealerScoreDiv = document.querySelector('.dealerScoreDiv');
+const dealerScoreSpan = document.querySelector('.dealerScoreSpan');
 const playerCardSlot1 = document.querySelector('.playerCardSlot1');
 const playerCardSlot2 = document.querySelector('.playerCardSlot2');
 const playerScoreSpan = document.querySelector('.playerScoreSpan');
+const twentyOneBanner = document.createElement('h2');
 const usernameHeader = document.querySelector('.username');
 let deckId;
 let dealerCard1;
@@ -51,11 +54,75 @@ usernameHeader.textContent = username;
 dealBtn.addEventListener('click', dealCards);
 
 
-
-
-
-
 // Functions
+
+function activateHitButton() {
+   
+    if (playerScore < 21) {
+            drawOneCard().then(cardObj => {
+                appendCardToCardSlot(playerCardSlot2, cardObj, 'drawnCard');
+                updatePlayerScore(cardObj);
+            });
+    } 
+
+    setTimeout(() => {
+      
+        if (playerScore === 21) {
+            activateTwentyOneBanner();
+            toggleHideDealButton();
+            removeHitStayButtons();
+            clearBoard();
+        } else if (playerScore > 21) { 
+            activateBustBanner(username);
+        } else {
+            appendWinnerBanner();
+        }
+    }, 1000);
+}
+
+function activateStayButton() {
+    const dealerFaceDownCard = document.querySelector('.dealerFaceDownCard');
+    console.log(dealerFaceDownCard);
+    if (dealerFaceDownCard) {
+        turnOverFaceDownCard();
+        toggleDealerScore();
+        removeHitStayButtons();
+        dealersTurn();
+    }
+    
+}
+
+function activateBustBanner(name) {
+    toggleHideDealButton();
+    bustBanner.textContent = `${name} BUSTS`;
+    deckOfCardsDiv.append(bustBanner);
+    removeHitStayButtons();
+    
+}
+
+function activateTwentyOneBanner() {
+   
+    twentyOneBanner.textContent = 'TWENTY-ONE!';
+    deckOfCardsDiv.append(twentyOneBanner);
+}
+
+function addHitAndStayButtons() {
+
+    if (playerScore < 21) {
+        const hitButton = document.createElement('button');
+        const stayButton = document.createElement('button');
+        hitButton.classList.add('hitButton');
+        stayButton.classList.add('stayButton');
+        hitButton.textContent = 'HIT';
+        stayButton.textContent = 'STAY';
+        hitButton.textContent = 'HIT';
+        stayButton.textContent = 'STAY';
+        hitButton.addEventListener('click', activateHitButton);
+        stayButton.addEventListener('click', activateStayButton);
+        deckOfCardsDiv.append(hitButton, stayButton);
+    } 
+
+}
 
 function appendDeckImage() {
     deckImage.setAttribute('src', currCardColorFile);
@@ -75,11 +142,23 @@ function appendCardToCardSlot(slot, cardObj, className) {
     if (slot === dealerCardSlot2) {
         const cardBackImageElement = document.createElement('img');
         cardBackImageElement.setAttribute('src', `${cardColorsObj[cardColor]}`);
-        cardBackImageElement.setAttribute('alt', `${cardColor} back card`);
-        cardBackImageElement.classList.add('dealerBackOfCard');
+        cardBackImageElement.setAttribute('alt', `${cardColor} back of playing card`);
+        cardBackImageElement.classList.add('dealerFaceDownCard');
         slot.append(cardBackImageElement);
     }
 
+}
+
+function appendWinnerBanner() {
+    const winnerBanner = document.createElement('p');
+    if (dealerScore > playerScore) {
+        winnerBanner.textContent = "Dealer Wins";
+    } else if (dealerScore < playerScore) {
+        winnerBanner.textContent = `${username} Wins`;
+    } else {
+        winnerBanner.textContent = `It's a Tie!`;
+    }
+    deckOfCardsDiv.append(winnerBanner);
 }
 
 function assignCardInfo(slot, cardObj) {
@@ -89,11 +168,12 @@ function assignCardInfo(slot, cardObj) {
             case dealerCardSlot1:
                 dealerCard1 = result;
                 appendCardToCardSlot(dealerCardSlot1, dealerCard1, 'dealerCardOne');
-                
+                updateDealerScore(dealerCard1);
                 break;
             case dealerCardSlot2:
                 dealerCard2 = result;
                 appendCardToCardSlot(dealerCardSlot2, dealerCard2, 'dealerCardTwo');
+                updateDealerScore(dealerCard2);
                 break;
             case playerCardSlot1:
                 playerCard1 = result;
@@ -122,12 +202,55 @@ function callNewDeck() {
     assignDeckId(makeApiCall(newDeckApi));
 }
 
+function clearBoard() {
+    [dealerCardSlot1, dealerCardSlot2, playerCardSlot1, playerCardSlot2].forEach(slot => removeAllChildNodes(slot));
+    if (deckImage.nextSibling) {
+        deckImage.nextSibling.remove();
+    }
+    dealerScore = 0;
+    playerScore = 0;
+    clearScores();
+}
+
+function clearScores() {
+    dealerScoreSpan.textContent = '';
+    playerScoreSpan.textContent = '';
+}
+
 function createEventListener() {
 
 }
 
+function dealersTurn() {
+   
+    drawOneCard().then(cardObj => {
+        while (dealerScore < 17) {
+            updateDealerScore(cardObj);
+            appendCardToCardSlot(dealerCardSlot2, cardObj, 'dealerDrawnCard');
+            turnOverFaceDownCard();
+        }
+       
+    });
+    setTimeout(() => {
+        if (dealerScore > 21) {
+            activateBustBanner('Dealer');
+
+        } else {
+            toggleHideDealButton();
+            appendWinnerBanner();
+        }
+    }, 1000);
+}
+
 function dealCards() {
-    toggleHide();
+    toggleHideDealButton();
+    if(deckImage.nextSibling) {
+        clearBoard();
+    }
+
+    setTimeout(() => {
+        addHitAndStayButtons();
+    }, 5 * 1000);
     dealCardToPlayer()
         .then(dealCardToDealer)
         .then(dealCardToPlayer)
@@ -145,7 +268,7 @@ function dealCardToPlayer() {
             }
 
             resolve();
-        }, delay);
+        }, 1000);
     });
 }
 
@@ -159,12 +282,11 @@ function dealCardToDealer() {
                 assignCardInfo(dealerCardSlot2, drawOneCard());
             }
             resolve();
-        }, delay);
+        }, 1000);
     });
 }
 
 
-// create a function that will take drawOneCard() and extract the object as a return value use that value in the deal cards functions that will then be used in the appendCardsToSlot function
 function drawOneCard() {
     const drawCardApi = `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`;
     const drawnCardObj = {};
@@ -190,23 +312,53 @@ function makeApiCall(url) {
         });
 }
 
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+function removeHitStayButtons() {
+    const hitButton = document.querySelector('.hitButton');
+    const stayButton = document.querySelector('.stayButton');
+    hitButton.remove();
+    stayButton.remove();
+}
+
 function shuffleDeck(deckId) {
     const shuffleApi = `https://deckofcardsapi.com/api/deck/${deckId}/shuffle/`;
     makeApiCall(shuffleApi).then(result => console.log(result));
 }
 
-function toggleHide() {
+function toggleHideDealButton() {
     dealBtn.classList.toggle('hide');
+}
+
+function toggleDealerScore() {
+    dealerScoreDiv.classList.toggle('hide');
+}
+
+function turnOverFaceDownCard() {
+    const dealerFaceDownCard = document.querySelector('.dealerFaceDownCard');
+    dealerFaceDownCard.remove();
+}
+
+function updateDealerScore(cardObj) {
+    dealerScore += cardValuesObj[cardObj.value];
+    dealerScoreSpan.textContent = dealerScore;
+
 }
 
 function updatePlayerScore(cardObj) {
     playerScore += cardValuesObj[cardObj.value];
     playerScoreSpan.textContent = playerScore;
-    console.log(playerScore);
+
 }
 
 
 window.onload = () => {
     callNewDeck();
     appendDeckImage();
+    toggleDealerScore();
+
 };

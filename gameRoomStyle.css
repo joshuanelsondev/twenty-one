@@ -53,7 +53,7 @@ body.gameRoomBody {
 
 /* Buttons */
 .dealBtn {
-    border: 1px solid black;
+    cursor: pointer;
 }
 
 .hide {
