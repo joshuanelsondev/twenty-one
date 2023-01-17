@@ -35,12 +35,15 @@ const dealerCardSlot1 = document.querySelector('.dealerCardSlot1');
 const dealerCardSlot2 = document.querySelector('.dealerCardSlot2');
 const playerCardSlot1 = document.querySelector('.playerCardSlot1');
 const playerCardSlot2 = document.querySelector('.playerCardSlot2');
+const playerScoreSpan = document.querySelector('.playerScoreSpan');
 const usernameHeader = document.querySelector('.username');
 let deckId;
 let dealerCard1;
 let dealerCard2;
+let dealerScore = 0;
 let playerCard1;
 let playerCard2;
+let playerScore = 0;
 let remainingCardCount;
 usernameHeader.textContent = username;
 
@@ -61,48 +64,46 @@ function appendDeckImage() {
     deckImage.classList.add('deckImage');
 }
 
-function appendCardToCardSlot(slot, cardObj) {
+function appendCardToCardSlot(slot, cardObj, className) {
 
     const cardImageElement = document.createElement('img');
     cardImageElement.setAttribute('src', cardObj.image);
     cardImageElement.setAttribute('alt',`${cardObj.value} of ${cardObj.suit}`);
+    cardImageElement.classList.add(className);
     slot.append(cardImageElement);
 
     if (slot === dealerCardSlot2) {
         const cardBackImageElement = document.createElement('img');
         cardBackImageElement.setAttribute('src', `${cardColorsObj[cardColor]}`);
         cardBackImageElement.setAttribute('alt', `${cardColor} back card`);
+        cardBackImageElement.classList.add('dealerBackOfCard');
         slot.append(cardBackImageElement);
     }
+
 }
 
 function assignCardInfo(slot, cardObj) {
     // make assignments after promise is fulfilled
-    console.log(slot);
     cardObj.then(result => {
         switch (slot) {
             case dealerCardSlot1:
-                console.log(1);
                 dealerCard1 = result;
-                appendCardToCardSlot(dealerCardSlot1, dealerCard1);
+                appendCardToCardSlot(dealerCardSlot1, dealerCard1, 'dealerCardOne');
+                
                 break;
             case dealerCardSlot2:
-                console.log(2);
-
                 dealerCard2 = result;
-                appendCardToCardSlot(dealerCardSlot2, dealerCard2);
+                appendCardToCardSlot(dealerCardSlot2, dealerCard2, 'dealerCardTwo');
                 break;
             case playerCardSlot1:
-                console.log(3);
-
                 playerCard1 = result;
-                appendCardToCardSlot(playerCardSlot1, playerCard1);
+                appendCardToCardSlot(playerCardSlot1, playerCard1, 'playerCardOne');
+                updatePlayerScore(playerCard1);
                 break;
             case playerCardSlot2:
-                console.log(4);
-
                 playerCard2 = result;
-                appendCardToCardSlot(playerCardSlot2, playerCard2);
+                appendCardToCardSlot(playerCardSlot2, playerCard2, 'playerCardTwo');
+                updatePlayerScore(playerCard2);
                 break;
         }
 
@@ -121,11 +122,17 @@ function callNewDeck() {
     assignDeckId(makeApiCall(newDeckApi));
 }
 
+function createEventListener() {
+
+}
+
 function dealCards() {
+    toggleHide();
     dealCardToPlayer()
         .then(dealCardToDealer)
         .then(dealCardToPlayer)
         .then(dealCardToDealer);
+
 }
 
 function dealCardToPlayer() {
@@ -187,6 +194,17 @@ function shuffleDeck(deckId) {
     const shuffleApi = `https://deckofcardsapi.com/api/deck/${deckId}/shuffle/`;
     makeApiCall(shuffleApi).then(result => console.log(result));
 }
+
+function toggleHide() {
+    dealBtn.classList.toggle('hide');
+}
+
+function updatePlayerScore(cardObj) {
+    playerScore += cardValuesObj[cardObj.value];
+    playerScoreSpan.textContent = playerScore;
+    console.log(playerScore);
+}
+
 
 window.onload = () => {
     callNewDeck();

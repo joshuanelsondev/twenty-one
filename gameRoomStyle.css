@@ -50,3 +50,12 @@ body.gameRoomBody {
 .deckImage:active {
     height: 269px;
 }
+
+/* Buttons */
+.dealBtn {
+    border: 1px solid black;
+}
+
+.hide {
+    display: none !important;
+}
