@@ -35,6 +35,7 @@ const dealerCardSlot1 = document.querySelector('.dealerCardSlot1');
 const dealerCardSlot2 = document.querySelector('.dealerCardSlot2');
 const dealerScoreDiv = document.querySelector('.dealerScoreDiv');
 const dealerScoreSpan = document.querySelector('.dealerScoreSpan');
+const dealerTempScore = document.querySelector('.dealerTempScore');
 const playerCardSlot1 = document.querySelector('.playerCardSlot1');
 const playerCardSlot2 = document.querySelector('.playerCardSlot2');
 const playerScoreSpan = document.querySelector('.playerScoreSpan');
@@ -48,6 +49,7 @@ let playerCard1;
 let playerCard2;
 let playerScore = 0;
 let remainingCardCount;
+deckImage.classList.add('card');
 usernameHeader.textContent = username;
 
 // EventListeners
@@ -60,7 +62,7 @@ function activateHitButton() {
    
     if (playerScore < 21) {
             drawOneCard().then(cardObj => {
-                appendCardToCardSlot(playerCardSlot2, cardObj, 'drawnCard');
+                appendCardToCardSlot(playerCardSlot2, cardObj, 'playerDrawnCard');
                 updatePlayerScore(cardObj);
             });
     } 
@@ -74,18 +76,16 @@ function activateHitButton() {
             clearBoard();
         } else if (playerScore > 21) { 
             activateBustBanner(username);
-        } else {
-            appendWinnerBanner();
-        }
+        } 
     }, 1000);
 }
 
 function activateStayButton() {
     const dealerFaceDownCard = document.querySelector('.dealerFaceDownCard');
-    console.log(dealerFaceDownCard);
     if (dealerFaceDownCard) {
+        toggleDealerTempScore();
         turnOverFaceDownCard();
-        toggleDealerScore();
+        toggleDealerScoreSpan();
         removeHitStayButtons();
         dealersTurn();
     }
@@ -137,13 +137,16 @@ function appendCardToCardSlot(slot, cardObj, className) {
     cardImageElement.setAttribute('src', cardObj.image);
     cardImageElement.setAttribute('alt',`${cardObj.value} of ${cardObj.suit}`);
     cardImageElement.classList.add(className);
+    cardImageElement.classList.add('card');
     slot.append(cardImageElement);
 
     if (slot === dealerCardSlot2) {
         const cardBackImageElement = document.createElement('img');
         cardBackImageElement.setAttribute('src', `${cardColorsObj[cardColor]}`);
         cardBackImageElement.setAttribute('alt', `${cardColor} back of playing card`);
-        cardBackImageElement.classList.add('dealerFaceDownCard');
+        cardBackImageElement.classList.add('dealerFaceDownCard'); 
+        cardBackImageElement.classList.add('card');
+
         slot.append(cardBackImageElement);
     }
 
@@ -151,14 +154,26 @@ function appendCardToCardSlot(slot, cardObj, className) {
 
 function appendWinnerBanner() {
     const winnerBanner = document.createElement('p');
-    if (dealerScore > playerScore) {
-        winnerBanner.textContent = "Dealer Wins";
-    } else if (dealerScore < playerScore) {
-        winnerBanner.textContent = `${username} Wins`;
-    } else {
-        winnerBanner.textContent = `It's a Tie!`;
-    }
+    winnerBanner.classList.add('winnerBanner');
     deckOfCardsDiv.append(winnerBanner);
+    if (dealerScore === playerScore) {
+        winnerBanner.textContent = `It's a Tie!`;
+        return;
+    }
+    if (dealerScore > 21) {
+        winnerBanner.textContent = `${username} Wins`;
+        return ;
+    } else if (playerScore > 21) {
+        winnerBanner.textContent = "Dealer Wins";
+        return ;
+    } 
+    if (dealerScore < playerScore) {
+        winnerBanner.textContent = `${username} Wins`;
+        return ;
+    } else {
+        winnerBanner.textContent = "Dealer Wins";
+        return ;
+    }
 }
 
 function assignCardInfo(slot, cardObj) {
@@ -168,6 +183,7 @@ function assignCardInfo(slot, cardObj) {
             case dealerCardSlot1:
                 dealerCard1 = result;
                 appendCardToCardSlot(dealerCardSlot1, dealerCard1, 'dealerCardOne');
+                updateDealerTempScore(dealerCard1);
                 updateDealerScore(dealerCard1);
                 break;
             case dealerCardSlot2:
@@ -224,28 +240,38 @@ function createEventListener() {
 function dealersTurn() {
    
     drawOneCard().then(cardObj => {
-        while (dealerScore < 17) {
-            updateDealerScore(cardObj);
-            appendCardToCardSlot(dealerCardSlot2, cardObj, 'dealerDrawnCard');
-            turnOverFaceDownCard();
-        }
-       
+        setTimeout(() => {
+            if (dealerScore < 17) {
+                updateDealerScore(cardObj);
+                appendCardToCardSlot(dealerCardSlot2, cardObj, 'dealerDrawnCard');
+                turnOverFaceDownCard();
+                setTimeout(() => {
+                    dealersTurn();
+                });
+            } else if (dealerScore === 21) {
+                activateTwentyOneBanner();
+                appendWinnerBanner();
+            } else if (dealerScore > 21) {
+                activateBustBanner('Dealer');
+                appendWinnerBanner();
+            } else {
+                appendWinnerBanner();
+                toggleHideDealButton();
+            }
+        }, 1000);
     });
-    setTimeout(() => {
-        if (dealerScore > 21) {
-            activateBustBanner('Dealer');
-
-        } else {
-            toggleHideDealButton();
-            appendWinnerBanner();
-        }
-    }, 1000);
+    
 }
 
 function dealCards() {
     toggleHideDealButton();
-    if(deckImage.nextSibling) {
-        clearBoard();
+    toggleDealerScoreSpan();
+    removeWinnerBanner();
+    clearBoard();
+    
+    if (playerScore === 21) {
+        appendWinnerBanner();
+        toggleHideDealButton();
     }
 
     setTimeout(() => {
@@ -291,6 +317,7 @@ function drawOneCard() {
     const drawCardApi = `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`;
     const drawnCardObj = {};
     return makeApiCall(drawCardApi).then(result => {
+        console.log(result);
         drawnCardObj.deckId = result.deck_id;
         drawnCardObj.value = result.cards[0].value;
         drawnCardObj.image = result.cards[0].image;
@@ -321,9 +348,19 @@ function removeAllChildNodes(parent) {
 function removeHitStayButtons() {
     const hitButton = document.querySelector('.hitButton');
     const stayButton = document.querySelector('.stayButton');
-    hitButton.remove();
-    stayButton.remove();
+    if (hitButton || stayButton) {
+        hitButton.remove();
+        stayButton.remove();
+    }
 }
+
+function removeWinnerBanner() {
+    const winnerBanner = document.querySelector('.winnerBanner');
+    if (winnerBanner) {
+        winnerBanner.remove();
+    }
+}
+
 
 function shuffleDeck(deckId) {
     const shuffleApi = `https://deckofcardsapi.com/api/deck/${deckId}/shuffle/`;
@@ -334,13 +371,20 @@ function toggleHideDealButton() {
     dealBtn.classList.toggle('hide');
 }
 
-function toggleDealerScore() {
-    dealerScoreDiv.classList.toggle('hide');
+function toggleDealerTempScore() {
+    dealerTempScore.classList.toggle('hide');
+}
+function toggleDealerScoreSpan() {
+    dealerScoreSpan.classList.toggle('hide');
 }
 
 function turnOverFaceDownCard() {
     const dealerFaceDownCard = document.querySelector('.dealerFaceDownCard');
     dealerFaceDownCard.remove();
+}
+
+function updateDealerTempScore(dealerCard1) {
+    dealerTempScore.textContent = cardValuesObj[dealerCard1.value];
 }
 
 function updateDealerScore(cardObj) {
@@ -350,6 +394,7 @@ function updateDealerScore(cardObj) {
 }
 
 function updatePlayerScore(cardObj) {
+    // Create a condition for Aces
     playerScore += cardValuesObj[cardObj.value];
     playerScoreSpan.textContent = playerScore;
 
@@ -359,6 +404,6 @@ function updatePlayerScore(cardObj) {
 window.onload = () => {
     callNewDeck();
     appendDeckImage();
-    toggleDealerScore();
+    // toggleDealerScoreSpan();
 
 };

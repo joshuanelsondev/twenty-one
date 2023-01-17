@@ -6,12 +6,12 @@ body.gameRoomBody {
 }
 
 .gameRoomHeaderDiv {
+    position: relative;
     display: grid;
     height: 100px;
     width: 100vw;
     color: White;
     text-align: center;
-    background-color: black;
     margin: 0;
     align-items: center;
     background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
@@ -26,34 +26,150 @@ body.gameRoomBody {
 .gameRoomMainContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: repeat(2, 200px);
-    height: auto;
+    grid-template-rows: 1fr;
+    height: 80vh;
+    width: 100vw;
+    text-align: center;
 }
 
-.dealerDiv,
-.deckOfCardsDiv, 
+
+.dealerDiv {
+
+}
+.deckOfCardsDiv {
+
+}
+
 .playerDiv {
-    border: 2px solid black;
+
 }
 
 .deckImage {
-    border-radius: 12px;
-    height: 270px;
-    box-shadow: #1c1c1c 0px 10px 10px,
-        #3f3f3f 0px 15px 10px,
-        #1c1c1c 0px 20px 10px,
-        #3f3f3f 0px 25px 10px,
-        #1c1c1c 0px 30px 10px;
-    cursor: pointer;
+    box-shadow: #1c1c1c 0px 10px 10px, #3f3f3f 0px 15px 10px, #1c1c1c 0px 20px 10px, #3f3f3f 0px 25px 10px, #1c1c1c 0px 30px 10px !important;
+    position: absolute;
+    top: 35vh;
+    left: 45vw;
 }
 
 .deckImage:active {
-    height: 269px;
+    height: 219px;
 }
 
+.card {
+    height: 220px;
+    width: 150px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px;
+}
+
+.dealerCardSlotDiv {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    position: absolute;
+    top: 35vh;
+    left: 20vh;
+    justify-items: center;
+}
+
+.dealerCardSlot1,
+.dealerCardSlot2 {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.dealerCardSlot2,
+.playerCardSlot2 {
+    display: grid;
+    justify-items: center;
+    transform: translate(-60px, 56px);
+}
+
+.dealerCardTwo,
+.dealerFaceDownCard {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.playerCardSlotDiv {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    position: absolute;
+    top: 35vh;
+    right: 20vh;
+    justify-items: center;
+}
+
+.playerCardSlot1,
+.playerCardSlot2 {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+
+/* 
+.dealerCardSlot1,
+.dealerCardSlot2,
+.playerCardOne {
+    position: absolute;
+    top: 300px;
+    left: 300px;
+}
+
+
+.dealerCardSlot2 {
+    position: absolute;
+    left: 260px;
+    transform: translateY(50px);
+    display: grid;
+    z-index: 1;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    transform: translateY(50px);
+} */
+
+/* .dealerFaceDownCard,
+.dealerCardTwo {
+    display: grid;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.playerCardTwo {
+    position: absolute;
+    top: 300px;
+    right: 120px;
+    transform: translateY(50px);
+}
+
+.playerDrawnCard {
+    position: relative;
+    top: 400px;
+    right: 120px;   
+} */
 /* Buttons */
-.dealBtn {
+.dealBtn, .hitButton,
+.stayButton {
+    background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+    color: white;
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    position: relative;
+    top: 55vh;
     cursor: pointer;
+    box-shadow: 5px 5px 5px black;
+}
+
+.hitButton {
+    margin-right: 10px;
+}
+
+.stayButton {
+    margin-left: 10px;
 }
 
 .hide {
