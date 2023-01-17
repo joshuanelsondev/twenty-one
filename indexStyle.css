@@ -137,6 +137,7 @@ label {
     border-bottom: 1px solid white;
     width: 200px;
     color: white;  
+    text-align: center;
 }
 
 .textInput:focus {
@@ -295,3 +296,34 @@ select:-webkit-autofill {
     position: absolute;
     left: 270px;
 }
+
+.randomUsernameBtn:hover {
+    height: 19px;
+}
+
+.nameSymbol, .usernameSymbol {
+    position: relative;
+    top: 16px;
+}
+
+.shuffle {
+    position: relative;
+    top: 25px;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+}
+

@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="indexStyle.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script type="module" src="./twentyone.js" defer></script>
     <title>Twenty-One</title>
 </head>
@@ -24,14 +26,20 @@
                     <button class="closeUserInfoFormBtn" >x</button>
                     <div class="nameDiv">
                         <label for="name">Name</label>
+                        <span class="material-symbols-outlined nameSymbol">
+                            person
+                        </span>
                         <input class="textInput nameInput" type="text" name="name" id="name" placeholder="Type your name" maxlength="20"
                             pattern="^[A-Za-z]+$">
                     </div>
                     <div class="usernameDiv">
                         <label for="userName">Username</label>
+                        <span class="material-symbols-outlined usernameSymbol">
+                            person
+                        </span>
                         <input class="textInput usernameTextField" type="text" name="userName" id="userName"
                             placeholder="Create a username">
-                        <button class="randomUsernameBtn">⟳</button>
+                        <button class="randomUsernameBtn"><span class="material-symbols-outlined shuffle">shuffle</span></button>
                     </div>
                     <div class="cardColorsDiv">
                         <label class="cardColorsLabel" for="cardColors">Choose a card color</label>
