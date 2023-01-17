@@ -35,7 +35,6 @@ const dealerCardSlot1 = document.querySelector('.dealerCardSlot1');
 const dealerCardSlot2 = document.querySelector('.dealerCardSlot2');
 const dealerScoreDiv = document.querySelector('.dealerScoreDiv');
 const dealerScoreSpan = document.querySelector('.dealerScoreSpan');
-const dealerTempScore = document.querySelector('.dealerTempScore');
 const playerCardSlot1 = document.querySelector('.playerCardSlot1');
 const playerCardSlot2 = document.querySelector('.playerCardSlot2');
 const playerScoreSpan = document.querySelector('.playerScoreSpan');
@@ -45,6 +44,7 @@ let deckId;
 let dealerCard1;
 let dealerCard2;
 let dealerScore = 0;
+let dealerTempScoreSpan;
 let playerCard1;
 let playerCard2;
 let playerScore = 0;
@@ -59,7 +59,9 @@ dealBtn.addEventListener('click', dealCards);
 // Functions
 
 function activateHitButton() {
-   
+    createShuffleButton();
+
+
     if (playerScore < 21) {
             drawOneCard().then(cardObj => {
                 appendCardToCardSlot(playerCardSlot2, cardObj, 'playerDrawnCard');
@@ -71,9 +73,7 @@ function activateHitButton() {
       
         if (playerScore === 21) {
             activateTwentyOneBanner();
-            toggleHideDealButton();
             removeHitStayButtons();
-            clearBoard();
         } else if (playerScore > 21) { 
             activateBustBanner(username);
         } 
@@ -83,17 +83,19 @@ function activateHitButton() {
 function activateStayButton() {
     const dealerFaceDownCard = document.querySelector('.dealerFaceDownCard');
     if (dealerFaceDownCard) {
-        toggleDealerTempScore();
         turnOverFaceDownCard();
         toggleDealerScoreSpan();
+        removeDealerTempScoreSpan();
         removeHitStayButtons();
         dealersTurn();
+        createShuffleButton();
+
     }
     
 }
 
 function activateBustBanner(name) {
-    toggleHideDealButton();
+    toggleDealButton();
     bustBanner.textContent = `${name} BUSTS`;
     deckOfCardsDiv.append(bustBanner);
     removeHitStayButtons();
@@ -104,6 +106,7 @@ function activateTwentyOneBanner() {
    
     twentyOneBanner.textContent = 'TWENTY-ONE!';
     deckOfCardsDiv.append(twentyOneBanner);
+    toggleDealButton();
 }
 
 function addHitAndStayButtons() {
@@ -121,6 +124,12 @@ function addHitAndStayButtons() {
         stayButton.addEventListener('click', activateStayButton);
         deckOfCardsDiv.append(hitButton, stayButton);
     } 
+}
+
+function appendDealerTempScoreSpan() {
+    dealerTempScoreSpan = document.createElement('span');
+    dealerTempScoreSpan.classList.add('dealerTempScoreSpan');
+    dealerScoreSpan.after(dealerTempScoreSpan);
 
 }
 
@@ -149,7 +158,6 @@ function appendCardToCardSlot(slot, cardObj, className) {
 
         slot.append(cardBackImageElement);
     }
-
 }
 
 function appendWinnerBanner() {
@@ -207,9 +215,10 @@ function assignCardInfo(slot, cardObj) {
 }
 
 function assignDeckId(promise) {
-    promise.then(result => {
-        deckId = result.deck_id;
+    promise.then(cardObj => {
+        deckId = cardObj.deck_id;
         shuffleDeck(deckId);
+        updateRemainingCardCount(cardObj.remaining);
     });
 }
 
@@ -223,18 +232,25 @@ function clearBoard() {
     if (deckImage.nextSibling) {
         deckImage.nextSibling.remove();
     }
-    dealerScore = 0;
-    playerScore = 0;
+
     clearScores();
 }
 
 function clearScores() {
+    if (dealerTempScoreSpan) {
+        dealerTempScoreSpan.remove();
+    }
+    dealerScore = 0;
+    playerScore = 0;
     dealerScoreSpan.textContent = '';
     playerScoreSpan.textContent = '';
+    
 }
 
-function createEventListener() {
-
+function createShuffleButton()  {
+    if (remainingCardCount < 10) {
+        dealBtn.textContent = "Shuffle Deck";
+    }
 }
 
 function dealersTurn() {
@@ -256,7 +272,7 @@ function dealersTurn() {
                 appendWinnerBanner();
             } else {
                 appendWinnerBanner();
-                toggleHideDealButton();
+                toggleDealButton();
             }
         }, 1000);
     });
@@ -264,18 +280,26 @@ function dealersTurn() {
 }
 
 function dealCards() {
-    toggleHideDealButton();
-    toggleDealerScoreSpan();
-    removeWinnerBanner();
-    clearBoard();
+    if (remainingCardCount < 52) {
+        if (dealBtn.textContent === 'Shuffle Deck') {
+            shuffleDeck(deckId);
+        }
+        editDealButtonText();
+    } 
     
-    if (playerScore === 21) {
-        appendWinnerBanner();
-        toggleHideDealButton();
-    }
-
+    clearBoard();
+    hideDealerScoreSpan();
+    removeWinnerBanner();
+    appendDealerTempScoreSpan();
+    toggleDealButton();
+   
+    
     setTimeout(() => {
         addHitAndStayButtons();
+        if (playerScore === 21) {
+            activateTwentyOneBanner();
+            appendWinnerBanner();
+        }
     }, 5 * 1000);
     dealCardToPlayer()
         .then(dealCardToDealer)
@@ -318,6 +342,7 @@ function drawOneCard() {
     const drawnCardObj = {};
     return makeApiCall(drawCardApi).then(result => {
         console.log(result);
+        updateRemainingCardCount(result.remaining);
         drawnCardObj.deckId = result.deck_id;
         drawnCardObj.value = result.cards[0].value;
         drawnCardObj.image = result.cards[0].image;
@@ -326,6 +351,16 @@ function drawOneCard() {
         return drawnCardObj;
     });
 
+}
+
+function editDealButtonText() {
+    if (remainingCardCount < 52) {
+        dealBtn.textContent = 'Deal Again';
+    }
+}
+
+function hideDealerScoreSpan() {
+    dealerScoreSpan.classList.add('hide');
 }
 
 function makeApiCall(url) {
@@ -345,6 +380,12 @@ function removeAllChildNodes(parent) {
     }
 }
 
+function removeDealerTempScoreSpan() {
+    if (dealerTempScoreSpan) {
+        dealerTempScoreSpan.remove();
+    }
+}
+
 function removeHitStayButtons() {
     const hitButton = document.querySelector('.hitButton');
     const stayButton = document.querySelector('.stayButton');
@@ -361,18 +402,19 @@ function removeWinnerBanner() {
     }
 }
 
-
 function shuffleDeck(deckId) {
+    
     const shuffleApi = `https://deckofcardsapi.com/api/deck/${deckId}/shuffle/`;
     makeApiCall(shuffleApi).then(result => console.log(result));
+
 }
 
-function toggleHideDealButton() {
+function toggleDealButton() {
     dealBtn.classList.toggle('hide');
 }
 
 function toggleDealerTempScore() {
-    dealerTempScore.classList.toggle('hide');
+    dealerTempScoreSpan.classList.toggle('hide');
 }
 function toggleDealerScoreSpan() {
     dealerScoreSpan.classList.toggle('hide');
@@ -384,7 +426,7 @@ function turnOverFaceDownCard() {
 }
 
 function updateDealerTempScore(dealerCard1) {
-    dealerTempScore.textContent = cardValuesObj[dealerCard1.value];
+    dealerTempScoreSpan.textContent = cardValuesObj[dealerCard1.value];
 }
 
 function updateDealerScore(cardObj) {
@@ -398,6 +440,11 @@ function updatePlayerScore(cardObj) {
     playerScore += cardValuesObj[cardObj.value];
     playerScoreSpan.textContent = playerScore;
 
+}
+
+function updateRemainingCardCount(count) {
+    const remainingCardCount = document.querySelector('.remainingCardCount');
+    remainingCardCount.textContent = count;
 }
 
 
