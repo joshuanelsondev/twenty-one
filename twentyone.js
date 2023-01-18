@@ -129,12 +129,12 @@ function enterGameRoom() {
 
 function showErrorMessage() {
     if(this.value === '') {
-        this.parentNode.lastChild.classList.add('showErrorMessage');
+        this.parentNode.nextElementSibling.classList.add('showErrorMessage');
     } 
 }
 
 function hideErrorMessage() {
-    this.parentNode.lastChild.classList.remove('showErrorMessage');
+    this.parentNode.nextElementSibling.classList.remove('showErrorMessage');
 }
 
 function createErrorMessage(error) {

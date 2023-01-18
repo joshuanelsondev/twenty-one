@@ -137,7 +137,7 @@ label {
     border-bottom: 1px solid white;
     width: 200px;
     color: white;  
-    text-align: center;
+    padding-left: 30px;
 }
 
 .textInput:focus {
@@ -198,6 +198,8 @@ select:-webkit-autofill {
 
 .showErrorMessage {
     display: block !important;
+    margin-left: 30px;
+    margin-top: 5px;
 }
 
 /* Buttons */
@@ -303,13 +305,16 @@ select:-webkit-autofill {
 
 .nameSymbol, .usernameSymbol {
     position: relative;
-    top: 16px;
+    left: 30px;
+    top: 5px;
 }
 
 .shuffle {
     position: relative;
-    top: 25px;
+    bottom: 25px;
 }
+
+
 
 .material-symbols-outlined {
     font-variation-settings:
