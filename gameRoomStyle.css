@@ -2,7 +2,6 @@ body.gameRoomBody {
     height: 100vh;
     background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
     margin: 0;
-
 }
 
 .gameRoomHeaderDiv {
@@ -150,4 +149,138 @@ body.gameRoomBody {
 
 .hide {
     display: none !important;
+}
+
+/* Media Queries */
+
+@media (360px <= width <= 920px) {
+    html {
+
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .gameRoomMainContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .dealerHeader,
+    .username {
+        font-size: 25px;
+    }
+
+    .deckImage {
+        height: 150px;
+        width: 100px;
+        position: absolute;
+        top: 20vh;
+        left: 17vh;
+    }
+
+    .dealBtn {
+        position: absolute;
+        top: 40vh;
+        left: 35vw;
+        width: 115px;
+        height: auto;
+    }
+
+    .dealerDiv {
+        position: absolute;
+        left: 25px;
+    }
+
+    .playerDiv {
+        position: absolute;
+        right: 25px;
+    }
+
+    .card {
+        height: 150px;
+        width: 100px;
+    }
+
+    .dealerCardSlotDiv {
+        position: absolute;
+        left: 40px;
+        top: 110px;
+        grid-template-rows: 210px 1fr;
+    }
+
+    .playerCardSlotDiv {
+        position: absolute;
+        right: 0;
+        top: 110px;
+        grid-template-rows: 210px 1fr;
+    }
+
+    .dealerCardSlot2,
+    .playerCardSlot2 {
+        transform: translate(-40px, 40px);
+    }
+
+    .hitButton {
+        position: absolute;
+        top: 40vh;
+        width: 100px;
+        height: auto;
+        left: 10vw;
+        font-size: 15px;
+    }
+
+    .stayButton {
+        position: absolute;
+        top: 40vh;
+        right: 6vh;
+        width: 100px;
+        height: auto;
+        font-size: 15px;
+    }
+
+    h3 {
+        position: absolute;
+        top: 12vh;
+        left: 10vh;
+        font-size: 25px;
+    }
+
+    .twentyOne {
+        position: absolute;
+        top: 55vh;
+        left: 1vh;
+        font-size: 25px;
+        z-index: 1;
+        background: #000000bd;
+        width: 400px;
+        height: 64px;
+        display: grid;
+        align-items: center;
+        color: white;
+    }
+
+    .winnerBanner {
+        position: absolute;
+        top: 55vh;
+        left: 1vh;
+        font-size: 25px;
+        z-index: 1;
+        background: #000000bd;
+        width: 400px;
+        height: 64px;
+        display: grid;
+        align-items: center;
+        color: white;
+    }
+
+    .dealerDrawnCardsSlot,
+    .playerDrawnCardsSlot {
+        display: flex;
+    }
 }

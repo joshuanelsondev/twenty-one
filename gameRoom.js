@@ -52,6 +52,7 @@ let playerCard2;
 let playerScore = 0;
 let remainingCardCount;
 deckImage.classList.add('card');
+twentyOneBanner.classList.add('twentyOne');
 usernameHeader.textContent = username;
 
 // EventListeners
@@ -455,3 +456,5 @@ window.onload = () => {
     // toggleDealerScoreSpan();
 
 };
+
+
