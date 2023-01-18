@@ -43,17 +43,6 @@ body.gameRoomBody {
     font-weight: 600;
 }
 
-.dealerDiv {
-
-}
-.deckOfCardsDiv {
-
-}
-
-.playerDiv {
-
-}
-
 .deckImage {
     box-shadow: #1c1c1c 0px 10px 10px, #3f3f3f 0px 15px 10px, #1c1c1c 0px 20px 10px, #3f3f3f 0px 25px 10px, #1c1c1c 0px 30px 10px !important;
     position: absolute;
@@ -72,14 +61,16 @@ body.gameRoomBody {
     box-shadow: 5px 5px 10px;
 }
 
+
+
 .dealerCardSlotDiv {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 300px 1fr;
     position: absolute;
     top: 35vh;
     left: 20vh;
-    justify-items: center;
+    justify-items: start;
 }
 
 .dealerCardSlot1,
@@ -116,10 +107,6 @@ body.gameRoomBody {
 .playerCardSlot2 {
     grid-column: 1;
     grid-row: 1;
-}
-
-.playerDrawnCardsSlot {
-    
 }
 
 .h3 {

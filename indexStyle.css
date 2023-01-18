@@ -171,6 +171,7 @@ select:-webkit-autofill {
     justify-items: center;
     box-shadow: 5px 5px 5px #08635a;
     letter-spacing: 1px;
+    line-height: 25px;
     transition: display 0.5s ease-in;
 }
 
