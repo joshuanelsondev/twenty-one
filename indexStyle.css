@@ -166,7 +166,7 @@ select:-webkit-autofill {
     background: #189e91;
     padding-right: 10px;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 50px;
+    grid-template-rows: 1fr 1fr;
     align-items: center;
     justify-items: center;
     box-shadow: 5px 5px 5px #08635a;
@@ -329,7 +329,7 @@ select:-webkit-autofill {
     font-variation-settings:
         'FILL' 0,
         'wght' 400,
-        'GRAD' 0,
+        'GRAD' 0
         'opsz' 48
 }
 
