@@ -3,6 +3,8 @@ This project is designed as a **Blackjack** game that makes api calls to the [de
 
 ## Process
 ---
+-The Link to my page is [here](https://twentyonegame.netlify.app/)
+
 When the page loads an initial api call will be made to retrieve a partial deck. This deck will be used to give the user an option to choose between playing a solo game of blackjack or playing with a range of computer players.
 
 A form will pop up to get the user's display name along with other thematic choices.
