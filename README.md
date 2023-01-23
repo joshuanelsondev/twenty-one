@@ -32,6 +32,7 @@ The login info is saved and used on the game room page through localStorage.
 Javascript is used to:
 
 - Make an initial api call to retrieve the ACE and KING of spades for the logo
+- Make an api call to generate a random username
 - Listen for button clicks to show the game rules or the login form
 - Show errors when the form is inputted incorrectly
 - Navigate to the game room page
