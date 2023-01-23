@@ -162,7 +162,7 @@ select:-webkit-autofill {
     height: 680px;
     width: 430px;
     position: absolute;
-    bottom: 75px;
+    top: 10%;
     background: #189e91;
     padding-right: 10px;
     grid-template-columns: 1fr 1fr;
