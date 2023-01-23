@@ -249,7 +249,7 @@ function clearScores() {
 }
 
 function createShuffleButton()  {
-    if (remainingCardCount <= 10) {
+    if (remainingCardCount <= 20) {
         dealBtn.textContent = "Shuffle Deck";
     }
 }

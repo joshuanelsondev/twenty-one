@@ -117,7 +117,6 @@ body.gameRoomBody {
 
 h3 {
     display: grid;
-    background: #00000099;
     height: 80px;
     width: 500px;
     align-items: center;
@@ -195,22 +194,22 @@ h3 {
 
 /* Media Queries */
 
-@media (360px <= width <= 920px) {
-    html {
-
-    }
-
+@media (280px <= width <= 1020px) {
+    
     body {
         display: flex;
         align-items: center;
         flex-direction: column;
     }
 
+    .gameRoomHeaderDiv {
+        height: 12vh;
+    }
+
     .gameRoomMainContainer {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+
     }
 
     .dealerHeader,
@@ -221,86 +220,91 @@ h3 {
     .deckImage {
         height: 150px;
         width: 100px;
-        position: absolute;
-        top: 20vh;
-        left: 17vh;
+        position: relative;
+        grid-row: 1;
     }
 
     .dealBtn {
-        position: absolute;
-        top: 40vh;
-        left: 35vw;
-        width: 115px;
+        width: fit-content;
+        min-width: 70px;
         height: auto;
+        grid-row: 2;
+        bottom: 10vh;
     }
 
-    .dealerDiv {
-        position: absolute;
-        left: 25px;
-    }
-
+    .dealerDiv,
     .playerDiv {
-        position: absolute;
-        right: 25px;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 70px 50px 1fr;
     }
 
     .card {
-        height: 150px;
-        width: 100px;
+        height: 120px;
+        width: 80px;
+    }
+
+    .deckOfCardsDiv {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        justify-items: center;
+        align-items: center;
     }
 
     .dealerCardSlotDiv {
-        position: absolute;
-        left: 40px;
-        top: 110px;
-        grid-template-rows: 210px 1fr;
+        grid-row: 3;
+        left: 10vw;
+        top: 10vh;
+        grid-template-rows: 36vh;
     }
 
     .playerCardSlotDiv {
-        position: absolute;
-        right: 0;
-        top: 110px;
-        grid-template-rows: 210px 1fr;
+        grid-row: 3;
+        top: 10vh;
+        right: 2vw;
+        grid-template-rows: 36vh;
     }
 
     .dealerCardSlot2,
     .playerCardSlot2 {
-        transform: translate(-40px, 40px);
+        transform: translate(-34px, 40px);
+        height: fit-content;
+        width: auto;
+    }
+
+    .hitButton,
+    .stayButton {
+        width: 60px;
+        height: auto;
+        font-size: 15px;
+        grid-row: 2;
+        grid-column: 1;
+        margin: 0;
     }
 
     .hitButton {
-        position: absolute;
-        top: 40vh;
-        width: 100px;
-        height: auto;
-        left: 10vw;
-        font-size: 15px;
+        position: relative;
+        bottom: 5vh;
     }
 
-    .stayButton {
-        position: absolute;
-        top: 40vh;
-        right: 6vh;
-        width: 100px;
-        height: auto;
-        font-size: 15px;
-    }
 
     h3 {
         position: absolute;
         top: 12vh;
-        left: 10vh;
         font-size: 25px;
+        background: #00000099;
+        width: 100%;
     }
 
     .twentyOne {
         position: absolute;
-        top: 55vh;
-        left: 1vh;
+        top: 50%;
         font-size: 25px;
         z-index: 1;
-        background: #000000bd;
-        width: 400px;
+        background-image: linear-gradient(to top, #0ba360c7 0%, #3cba92 100%);
+        backdrop-filter: blur(5px);
         height: 64px;
         display: grid;
         align-items: center;
@@ -309,8 +313,7 @@ h3 {
 
     .winnerBanner {
         position: absolute;
-        top: 55vh;
-        left: 1vh;
+        top: 40%;
         font-size: 25px;
         z-index: 1;
         background: #000000bd;
