@@ -9,7 +9,8 @@ This project:
 
 [Click to view site](https://twentyonegame.netlify.app/).
 
-[Video demo](https://us06web.zoom.us/rec/share/1j8Ec7y1gx5s18zli2IrM9nbYP1mAl4I13MS9T_o5p6z9rEvC0WGxVqTqevtmNo.e2CKmvGXhbQenhM4) Passcode: +*0aQY#Z
+[Video demo](https://us06web.zoom.us/rec/share/SK1s2jqUdH5zDIEkTkOnikkO_cSrs6d5cpwvk_t4m1WFlRaf7CGvZ1CIoM-oQSY.jwXBLwsKwN7xJRrn 
+Passcode: Yac3^isC) Passcode: Yac3^isC
 
 # Table of Contents
 - [Homepage](#homepage)
