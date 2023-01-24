@@ -22,6 +22,17 @@ body.gameRoomBody {
     margin: 0;
 }
 
+.nameTag {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 46%;
+    font-weight: 600;
+    font-size: 16px;
+}
+
 .gameRoomMainContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

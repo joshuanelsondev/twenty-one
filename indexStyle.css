@@ -40,6 +40,12 @@ body.indexBody {
     filter: drop-shadow(10px 10px 6px #009688);
 }
 
+.nameTag {
+    text-decoration: none;
+    color: #009688;
+    cursor: pointer;
+}
+
 .aceSpadeCenter {
     height: 500px;
     width: auto;
