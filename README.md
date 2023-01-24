@@ -20,7 +20,7 @@ This project:
 ![Homepage](./screenshots/twentyone_homepage_screenshot.png)
 
 
-The homepage uses a minimalist design with a center logo of the game and two buttons; one that open to a game rules card and the other to a login form.
+The homepage uses a minimalist design with a center logo of the game and two buttons; one that opens to a game rules card and the other to a login form.
 
 The login form contains three inputs:  
 - name input
