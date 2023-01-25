@@ -2,7 +2,7 @@
 - [Homepage](#homepage)
 - [GameRoom](#game-room)
 - [Additional Features](#additional-features)
-- [Getting Started](#getting-started)
+- [Local Setup](#local-setup)
 
 # Twenty-One
 My front-end portfolio project is designed to simulate a simplified version of the game **Twenty-One**, also known as Blackjack and a few other names. This page makes api calls to the [deck of cards](https://deckofcardsapi.com/) api to simulate using a deck or multiple decks of cards. An api call is also made to [randomuser.me](https://randomuser.me) to generate random usernames. 
@@ -60,7 +60,7 @@ Javascript is used to:
 - two different javascript files were used, one for the functionality of the home page and the other for the game room.
 - when an error message appears on the login form the x button can be pressed to close the form and when the form is reopened the error message is gone.
 
-# Getting Started
+# Local Setup
 
 1. Fork and clone this repository.
 2. Navigate to the cloned repository's directory on your command line. Then, run the following command:
