@@ -1,3 +1,9 @@
+# Table of Contents
+- [Homepage](#homepage)
+- [GameRoom](#game-room)
+- [Additional Features](#additional-features)
+- [Getting Started](#getting-started)
+
 # Twenty-One
 My front-end portfolio project is designed to simulate a simplified version of the game **Twenty-One**, also known as Blackjack and a few other names. This page makes api calls to the [deck of cards](https://deckofcardsapi.com/) api to simulate using a deck or multiple decks of cards. An api call is also made to [randomuser.me](https://randomuser.me) to generate random usernames. 
 
@@ -11,16 +17,11 @@ This project:
 
 [Video demo](https://us06web.zoom.us/rec/share/SK1s2jqUdH5zDIEkTkOnikkO_cSrs6d5cpwvk_t4m1WFlRaf7CGvZ1CIoM-oQSY.jwXBLwsKwN7xJRrn) Passcode: Yac3^isC
 
-# Table of Contents
-- [Homepage](#homepage)
-- [GameRoom](#game-room)
-- [Additional Features](#additional-features)
-
 # Homepage
 ![Homepage](./screenshots/twentyone_homepage_screenshot.png)
 
 
-The homepage uses a minimalist design with a center logo of the game and two buttons; one that opens to a game rules card and the other to a login form.
+The homepage uses a minimalist design with a center logo of the game and two buttons; one that opens` to a game rules card and the other to a login form.
 
 The login form contains three inputs:  
 - name input
@@ -56,5 +57,14 @@ Javascript is used to:
 - localStorage is used with the login form to store the user information that will be used in the game room.
 - two different javascript files were used, one for the functionality of the home page and the other for the game room.
 - when an error message appears on the login form the x button can be pressed to close the form and when the form is reopened the error message is gone.
+
+# Getting Started
+
+1. Fork and clone this repository.
+2. Navigate to the cloned repository's directory on your command line. Then, run the following command:
+```
+npm install
+```
+This will install the libraries needed to run the application.
 
 [Table of Contents](#table-of-contents)

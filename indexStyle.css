@@ -9,8 +9,8 @@ body.indexBody {
     justify-items: center;
     height: 100vh;
     width: 100vw;
-    align-items: start;
-    margin-top: 100px;
+    align-items: center;
+    grid-template-rows: 1fr;
 }
 
 .homePageCenterCard {
@@ -38,6 +38,10 @@ body.indexBody {
     position: relative;
     left: 75px;
     filter: drop-shadow(10px 10px 6px #009688);
+}
+
+footer {
+    margin-bottom: 1vh;
 }
 
 .nameTag {
